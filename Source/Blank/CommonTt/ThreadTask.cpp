@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "ThreadTask.h"
@@ -19,15 +19,15 @@ uint32 ThreadTask::Run()
 	if (TaskInterface != nullptr) {
 		TaskInterface->DoWork();
 
-		// ´Ó´ËÏß³ÌÇĞ»»ÖÁÓÎÏ·Ö÷Ïß³Ì
+		// ä»æ­¤çº¿ç¨‹åˆ‡æ¢è‡³æ¸¸æˆä¸»çº¿ç¨‹
 		FGraphEventRef Task = FFunctionGraphTask::CreateAndDispatchWhenReady(
 			[&]() {
-				ThreadTask_Delegate.ExecuteIfBound();// Ö´ĞĞÏß³ÌÀïµÄÒ»¸ö´úÀí.´Ë´úÀíÔÚgamemodeµÄÖ÷Ïß³ÌÀï°óÁËº¯ÊıPrintF.
+				ThreadTask_Delegate.ExecuteIfBound();// æ‰§è¡Œçº¿ç¨‹é‡Œçš„ä¸€ä¸ªä»£ç†.æ­¤ä»£ç†åœ¨gamemodeçš„ä¸»çº¿ç¨‹é‡Œç»‘äº†å‡½æ•°PrintF.
 			},
 			TStatId(), nullptr, ENamedThreads::GameThread 
 		);
 
-		// µÈ´ı´ËÏß³ÌÈÎÎñÍê³É.
+		// ç­‰å¾…æ­¤çº¿ç¨‹ä»»åŠ¡å®Œæˆ.
 		FTaskGraphInterface::Get().WaitUntilTaskCompletes(Task);
 	}
 

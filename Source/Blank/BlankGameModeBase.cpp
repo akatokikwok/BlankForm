@@ -9,7 +9,7 @@ void ABlankGameModeBase::BeginPlay()
 	Super::BeginPlay();
 
 	Interface = new ITaskInterface();
-	NewTask = new ThreadTask();// 线程.
+	NewTask = new ThreadTask();// 独立的一个线程.
 
 	NewTask->CreateThread(Interface);
 	NewTask->ThreadTask_Delegate.BindUObject(this, &ABlankGameModeBase::PrintF);
