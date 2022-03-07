@@ -2,6 +2,7 @@
 
 
 #include "BlankGameModeBase.h"
+#include "CommonTt/GraphTask.h"
 
 
 void ABlankGameModeBase::BeginPlay()
@@ -11,8 +12,10 @@ void ABlankGameModeBase::BeginPlay()
 	Interface = new ITaskInterface();
 	NewTask = new ThreadTask();// 独立的一个线程.
 
-	NewTask->CreateThread(Interface);
 	NewTask->ThreadTask_Delegate.BindUObject(this, &ABlankGameModeBase::PrintF);
+	NewTask->CreateThread(Interface);
+
+	TGraphTask<FTaskGraph>::CreateTask(nullptr, ENamedThreads::GameThread).ConstructAndDispatchWhenReady(4.5f);
 }
 
 void ABlankGameModeBase::EndPlay(const EEndPlayReason::Type EndPlayReason)
