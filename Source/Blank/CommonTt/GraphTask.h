@@ -2,7 +2,7 @@
 #include "CoreMinimal.h"
 #include "Async/TaskGraphInterfaces.h"
 
-/// 自定义的线程任务.
+/// 供TGraphTask去使用的 自定义的线程任务.
 class FTaskGraph
 {
 public:
@@ -19,7 +19,7 @@ public:
 	/** 任务组 */
 	FORCEINLINE TStatId GetStatId() { RETURN_QUICK_DECLARE_CYCLE_STAT(FTaskGraph, STATGROUP_TaskGraphTasks); }
 
-	/**  具体任务*/
+	/** override TGraphTask里的方法, 具体线程任务*/
 	void DoTask(ENamedThreads::Type CurrentThread, FGraphEventRef Subsequents) 
 	{ 
 		UE_LOG(LogTemp, Log, TEXT("HelloWorld: %f"),m_f); 
